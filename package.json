@@ -5,7 +5,8 @@
 	"main":         "index.js",
 	"files":        [
 		"index.js",
-		"lib"
+		"lib",
+		"stations.json"
 	],
 	"keywords":     ["public", "transport", "railway", "train", "api"],
 	"author":       "Jannis R <mail@jannisr.de>",
@@ -23,7 +24,8 @@
 		"tap-min": "^1.2.0"
 	},
 	"scripts": {
+		"build": "node build/index.js >stations.json",
 		"test": "node test.js | tap-min",
-		"prepublish": "npm test"
+		"prepublish": "npm run build && npm test"
 	}
 }
