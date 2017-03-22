@@ -1,0 +1,24 @@
+{
+	"name":         "locomore",
+	"description":  "A JavaScript client for the Locomore API.",
+	"version":      "0.1.0",
+	"main":         "index.js",
+	"files":        ["index.js"],
+	"keywords":     ["public", "transport", "railway", "train", "api"],
+	"author":       "Jannis R <mail@jannisr.de>",
+	"homepage":     "https://github.com/derhuerst/locomore",
+	"repository":   "derhuerst/locomore",
+	"bugs":         "https://github.com/derhuerst/locomore/issues",
+	"license":      "ISC",
+	"engines":      {"node": ">=6"},
+	"dependencies": {
+	},
+	"devDependencies": {
+		"tape": "^4.6.3",
+		"tap-min": "^1.2.0"
+	},
+	"scripts": {
+		"test": "node test.js | tap-min",
+		"prepublish": "npm test"
+	}
+}
