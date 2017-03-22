@@ -3,7 +3,10 @@
 	"description":  "A JavaScript client for the Locomore API.",
 	"version":      "0.1.0",
 	"main":         "index.js",
-	"files":        ["index.js"],
+	"files":        [
+		"index.js",
+		"lib"
+	],
 	"keywords":     ["public", "transport", "railway", "train", "api"],
 	"author":       "Jannis R <mail@jannisr.de>",
 	"homepage":     "https://github.com/derhuerst/locomore",
@@ -12,6 +15,8 @@
 	"license":      "ISC",
 	"engines":      {"node": ">=6"},
 	"dependencies": {
+		"cache-conf": "^0.5.0",
+		"got": "^6.7.1"
 	},
 	"devDependencies": {
 		"tape": "^4.6.3",
