@@ -7,6 +7,12 @@
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/locomore.svg)
 [![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
 
+Things still missing:
+
+- [routes](https://github.com/public-transport/friendly-public-transport-format/blob/master/docs/readme.md#route), [schedules](https://github.com/public-transport/friendly-public-transport-format/blob/master/docs/readme.md#schedule), prices from [this gist](https://gist.github.com/derhuerst/410d79ce2a8158705d7878e8af096577)
+- booking, seat selection :sparkles:
+- a ClI tool
+
 
 ## Installing
 
@@ -17,8 +23,29 @@ npm install locomore
 
 ## Usage
 
+### stations
+
+The [npm package](https://npmjs.com/locomore) contains data in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).
+
 ```js
-todo
+const stations = require('locomore')
+
+console.log(stations['8011065'])
+```
+
+```js
+{
+	type: 'station',
+	id: '8011065',
+	name: 'Frankfurt (Main) Süd',
+	code: 'FFS',
+	timezone: 'Europe/Berlin',
+	country: 'DEU',
+	coordinates: {
+		latitude: 50.07605700000001,
+		longitude: 8.670040900000004
+	}
+}
 ```
 
 
