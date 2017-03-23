@@ -2,8 +2,10 @@
 
 const test = require('tape')
 const isRoughlyEqual = require('is-roughly-equal')
+const moment = require('moment-timezone')
 
 const stations = require('./stations.json')
+const journeys = require('./lib/journeys')
 
 const validId = /^[\d]{7,12}$/
 
@@ -40,4 +42,52 @@ test('stations.json – all', (t) => {
 		}
 	}
 	t.end()
+})
+
+test('journeys – Berlin to Stuttgart in 2 days', (t) => {
+	const BerlinHbf = '8065969'
+	const StuttgartHbf = '8011065'
+
+	const thursday = moment.tz('Europe/Berlin').add(1, 'weeks').weekday(4)
+	const saturday = moment(thursday).weekday(6)
+
+	journeys(BerlinHbf, StuttgartHbf, +thursday, +saturday)
+	.then((journeys) => {
+		t.ok(Array.isArray(journeys))
+
+		journeys.forEach((journey, i) => t.test('journey ' + i, (t) => {
+			t.equal(journey.type, 'journey')
+			t.equal(typeof journey.id, 'string')
+
+			journey.legs.forEach((leg, i) => t.test('leg ' + i, (t) => {
+				t.equal(typeof leg.id, 'string')
+				t.equal(leg.mode, 'train')
+				t.equal(leg.public, true)
+
+				t.equal(typeof leg.origin, 'string')
+				t.ok(!isNaN(new Date(leg.departure)))
+				if (leg.departurePlatform) t.equal(typeof leg.departurePlatform, 'string')
+
+				t.equal(typeof leg.destination, 'string')
+				t.ok(!isNaN(new Date(leg.arrival)))
+				if (leg.arrivalPlatform) t.equal(typeof leg.arrivalPlatform, 'string')
+
+				t.ok(typeof leg.operator === 'string' || typeof leg.operator.id === 'string')
+
+				t.end()
+			}))
+
+			t.ok(journey.price)
+			t.equal(typeof journey.price.amount, 'number')
+			t.ok(journey.price.amount > 0)
+			t.equal(journey.price.currency, 'EUR')
+			t.equal(typeof journey.price.business, 'boolean')
+			t.equal(typeof journey.price.available, 'number')
+
+			t.end()
+		}))
+
+		t.end()
+	})
+	.catch(t.ifError)
 })
