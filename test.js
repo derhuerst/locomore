@@ -86,12 +86,12 @@ test('journeys – Berlin to Stuttgart in 2 days', (t) => {
 	const saturday = moment(thursday).weekday(6)
 
 	journeys(BerlinHbf, StuttgartHbf, +thursday, +saturday)
-	.then(({forth, back}) => {
-		t.ok(Array.isArray(forth))
-		forth.forEach(validateJourney(t))
+	.then(({outward, returning}) => {
+		t.ok(Array.isArray(outward))
+		outward.forEach(validateJourney(t))
 
-		t.ok(Array.isArray(back))
-		back.forEach(validateJourney(t))
+		t.ok(Array.isArray(returning))
+		returning.forEach(validateJourney(t))
 
 		t.end()
 	})

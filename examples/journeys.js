@@ -6,12 +6,12 @@ const journeys = require('../lib/journeys')
 
 const BerlinHbf = '8065969'
 const StuttgartHbf = '8011065'
-const forth = '2017-04-06'
-const back = '2017-04-08'
+const outward = '2017-04-06'
+const returning = '2017-04-08'
 
-journeys(BerlinHbf, StuttgartHbf, forth, back)
-.then(({forth, back}) => {
-	console.log(util.inspect(forth, {depth: Infinity}))
-	console.log(util.inspect(back, {depth: Infinity}))
+journeys(BerlinHbf, StuttgartHbf, outward, returning)
+.then(({outward, returning}) => {
+	console.log(util.inspect(outward, {depth: Infinity}))
+	console.log(util.inspect(returning, {depth: Infinity}))
 })
 .catch(console.error)
