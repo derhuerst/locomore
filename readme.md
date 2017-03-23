@@ -28,7 +28,7 @@ npm install locomore
 The [npm package](https://npmjs.com/locomore) contains data in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).
 
 ```js
-const stations = require('locomore')
+const stations = require('locomore/stations.json')
 
 console.log(stations['8011065'])
 ```
