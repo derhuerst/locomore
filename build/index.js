@@ -20,7 +20,7 @@ fetchToken()
 	.then((res) => res.body)
 })
 .then((data) => {
-	const stations = []
+	const stations = {}
 
 	for (let s of data) {
 		if (!s._u_i_c_station_code) {
@@ -44,7 +44,7 @@ fetchToken()
 			longitude: parseFloat(s.geo_data.longitude)
 		}
 
-		stations.push(station)
+		stations[station.id] = station
 
 		// todo: connected stations
 	}

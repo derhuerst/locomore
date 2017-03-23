@@ -20,6 +20,7 @@
 		"got": "^6.7.1"
 	},
 	"devDependencies": {
+		"is-roughly-equal": "^0.1.0",
 		"tape": "^4.6.3",
 		"tap-min": "^1.2.0"
 	},
