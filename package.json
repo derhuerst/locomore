@@ -17,7 +17,8 @@
 	"engines":      {"node": ">=6"},
 	"dependencies": {
 		"cache-conf": "^0.5.0",
-		"got": "^6.7.1"
+		"got": "^6.7.1",
+		"iso-date": "^1.0.0"
 	},
 	"devDependencies": {
 		"is-roughly-equal": "^0.1.0",
