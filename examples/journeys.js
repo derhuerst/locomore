@@ -10,7 +10,8 @@ const forth = '2017-04-06'
 const back = '2017-04-08'
 
 journeys(BerlinHbf, StuttgartHbf, forth, back)
-.then((journeys) => {
-	console.log(util.inspect(journeys, {depth: Infinity}))
+.then(({forth, back}) => {
+	console.log(util.inspect(forth, {depth: Infinity}))
+	console.log(util.inspect(back, {depth: Infinity}))
 })
 .catch(console.error)

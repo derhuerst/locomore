@@ -64,7 +64,20 @@ locomore.journeys(BerlinHbf, StuttgartHbf, date)
 .catch(console.error)
 ```
 
-The returned [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/promise) will resolve with an array of `journey`s in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format). Note that the legs are not fully spec-compatible, as the `schedule` is missing.
+Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/promise) that will resolve with an object with `forth` and `back`. Both are an array of `journey`s in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).
+
+```js
+{
+	forth: [
+		// journey objects
+	],
+	back: [
+		// journey objects
+	]
+}
+```
+
+A `journey` looks as follows. Note that the legs are not fully spec-compatible, as the `schedule` is missing.
 
 ```js
 [
