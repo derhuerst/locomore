@@ -10,7 +10,7 @@
 Things still missing:
 
 - [routes](https://github.com/public-transport/friendly-public-transport-format/blob/master/docs/readme.md#route), [schedules](https://github.com/public-transport/friendly-public-transport-format/blob/master/docs/readme.md#schedule), prices from [this gist](https://gist.github.com/derhuerst/410d79ce2a8158705d7878e8af096577)
-- booking, seat selection :sparkles:
+- booking, seat selection :sparkles: with [comfort zones](https://locomore.com/en/basic/)
 - a ClI tool
 
 
