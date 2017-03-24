@@ -78,7 +78,7 @@ const validateJourney = (t) => (journey, i) => {
 	})
 }
 
-test('journeys – Berlin to Stuttgart in 2 days', (t) => {
+test('journeys – Berlin to Stuttgart on Thursday', (t) => {
 	const BerlinHbf = '8065969'
 	const StuttgartHbf = '8011065'
 
@@ -92,6 +92,21 @@ test('journeys – Berlin to Stuttgart in 2 days', (t) => {
 
 		t.ok(Array.isArray(returning))
 		returning.forEach(validateJourney(t))
+
+		t.end()
+	})
+	.catch(t.ifError)
+})
+
+test('journeys – fetches outward if only one date passed', (t) => {
+	const BerlinHbf = '8065969'
+	const StuttgartHbf = '8011065'
+	const thursday = moment.tz('Europe/Berlin').add(1, 'weeks').weekday(4)
+
+	journeys(BerlinHbf, StuttgartHbf, +thursday)
+	.then(({outward, returning}) => {
+		t.ok(outward.length > 0)
+		t.equal(returning.length, 0)
 
 		t.end()
 	})
