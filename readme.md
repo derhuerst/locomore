@@ -112,6 +112,53 @@ A `journey` looks as follows. Note that the legs are not fully spec-compatible, 
 ]
 ```
 
+### more journey details
+
+To get more details for a journey, use `locomore.journeyDetails`. Pass in an array of service IDs or `journey` objects.
+
+```js
+locomore.journeys(BerlinHbf, StuttgartHbf, date)
+.then((data) => journeyDetails(data.outward))
+.then(console.log)
+.catch(console.error)
+```
+
+You will get an object like this:
+
+```js
+[
+	{ // first journey
+		via: [ // passed stations
+			{
+				type: 'station',
+				id: '8003004',
+				name: 'Berlin Ostbahnhof',
+				code: 'BHF',
+				timezone: 'Europe/Berlin',
+				country: null,
+				departure: '2017-03-30T14:42:00+0200',
+				arrival: '2017-03-30T14:41:00+0200',
+				departurePlatform: '7',
+				arrivalPlatform: '7'
+			},
+			// …
+			{
+				type: 'station',
+				id: '8029009',
+				name: 'Vaihingen (Enz)',
+				code: 'TV',
+				timezone: 'Europe/Berlin',
+				country: null,
+				departure: '2017-03-30T21:03:00+0200',
+				arrival: '2017-03-30T21:02:00+0200',
+				departurePlatform: '2',
+				arrivalPlatform: '2'
+			}
+		]
+	}
+]
+```
+
 
 ## Contributing
 
