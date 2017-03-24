@@ -8,6 +8,7 @@ const index = require('.')
 const stations = require('./stations.json')
 const journeys = require('./lib/journeys')
 const journeyDetails = require('./lib/journey-details')
+const {passenger: serializePassenger} = require('./lib/serialize')
 
 const validId = /^[\d]{7,12}$/
 
@@ -17,6 +18,23 @@ test('index', (t) => {
 	t.equal(index.stations, stations)
 	t.equal(index.journeys, journeys)
 	t.equal(index.journeyDetails, journeyDetails)
+})
+
+test('serializePassenger', (t) => {
+	t.plan(6)
+	const s = serializePassenger
+	const p1 = {type: 'child', wheelchair: true}
+	const p2 = {type: 'small-child', wheelchair: true, merkzeichenB: true}
+	const p3 = {type: 'adult'}
+
+	t.equal(s(p1).type, 'C_R')
+	t.equal(s(p1).disability_type, 'WH')
+
+	t.equal(s(p2).type, 'C_F')
+	t.equal(s(p2).disability_type, 'WHB')
+
+	t.equal(s(p3).type, 'A')
+	t.equal(s(p3).disability_type, 'NH')
 })
 
 test('stations.json – Berlin', (t) => {
