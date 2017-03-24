@@ -6,6 +6,7 @@ const moment = require('moment-timezone')
 
 const stations = require('./stations.json')
 const journeys = require('./lib/journeys')
+const journeyDetails = require('./lib/journey-details')
 
 const validId = /^[\d]{7,12}$/
 
@@ -26,21 +27,21 @@ test('stations.json – Berlin', (t) => {
 	t.end()
 })
 
-test('stations.json – all', (t) => {
-	for (let id in stations) {
-		const s = stations[id]
+const validateStation = (t) => (station) => {
+	t.equal(station.type, 'station')
+	t.ok(validId.test(station.id), id + ' has an invalid id')
+	t.equal(typeof station.name, 'string', id + ' has an invalid name')
+	t.equal(typeof station.timezone, 'string', id + ' has an invalid timezone') // todo
+	t.equal(typeof station.country, 'string', id + ' has an invalid country') // todo
 
-		t.equal(s.type, 'station')
-		t.ok(validId.test(s.id), id + ' has an invalid id')
-		t.equal(typeof s.name, 'string', id + ' has an invalid name')
-		t.equal(typeof s.timezone, 'string', id + ' has an invalid timezone') // todo
-		t.equal(typeof s.country, 'string', id + ' has an invalid country') // todo
-
-		if (s.coordinates) {
-			t.ok(isRoughlyEqual(3, s.coordinates.latitude, 50))
-			t.ok(isRoughlyEqual(3, s.coordinates.longitude, 10))
-		}
+	if (station.coordinates) {
+		t.ok(isRoughlyEqual(3, station.coordinates.latitude, 50))
+		t.ok(isRoughlyEqual(3, station.coordinates.longitude, 10))
 	}
+}
+
+test('stations.json – all', (t) => {
+	for (let id in stations) validateStation(t, stations[id])
 	t.end()
 })
 
@@ -108,6 +109,47 @@ test('journeys – fetches outward if only one date passed', (t) => {
 	.then(({outward, returning}) => {
 		t.ok(outward.length > 0)
 		t.equal(returning.length, 0)
+
+		t.end()
+	})
+	.catch(t.ifError)
+})
+
+const validateJourneyDetails = (t) => (details, i) => {
+	t.test('journey details ' + i, (t) => {
+		t.ok(Array.isArray(details.via))
+
+		for (let passed of details.via) {
+			validateStation(passed)
+
+			t.ok(!isNaN(new Date(passed.departure)))
+			if (passed.departurePlatform) {
+				t.equal(typeof passed.departurePlatform, 'string')
+			}
+
+			t.ok(!isNaN(new Date(passed.arrival)))
+			if (passed.arrivalPlatform) {
+				t.equal(typeof passed.arrivalPlatform, 'string')
+			}
+		}
+
+		t.end()
+	})
+}
+
+test('journeyDetails – Berlin to Stuttgart on Thursday', (t) => {
+	const BerlinHbf = '8065969'
+	const StuttgartHbf = '8011065'
+
+	const thursday = moment.tz('Europe/Berlin').add(1, 'weeks').weekday(4)
+
+	journeys(BerlinHbf, StuttgartHbf, +thursday)
+	.then(({outward}) => journeyDetails(outward))
+	.then((details) => {
+		t.ok(Array.isArray(details))
+		t.ok(details.length > 0)
+
+		details.forEach(validateJourneyDetails(t))
 
 		t.end()
 	})
