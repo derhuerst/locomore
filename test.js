@@ -4,11 +4,20 @@ const test = require('tape')
 const isRoughlyEqual = require('is-roughly-equal')
 const moment = require('moment-timezone')
 
+const index = require('.')
 const stations = require('./stations.json')
 const journeys = require('./lib/journeys')
 const journeyDetails = require('./lib/journey-details')
 
 const validId = /^[\d]{7,12}$/
+
+test('index', (t) => {
+	t.plan(3)
+
+	t.equal(index.stations, stations)
+	t.equal(index.journeys, journeys)
+	t.equal(index.journeyDetails, journeyDetails)
+})
 
 test('stations.json – Berlin', (t) => {
 	const s = stations['8065969'] // Berlin Hbf
