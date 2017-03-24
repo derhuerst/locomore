@@ -50,6 +50,10 @@ console.log(stations['8011065'])
 
 ### journeys
 
+```js
+journeys(from, to, outward = Date.now(), returning = null, opt = defeaults)
+```
+
 Using `locomore.journeys`, you can get directions and prices for routes from A to B.
 
 ```js
@@ -110,6 +114,20 @@ A `journey` looks as follows. Note that the legs are not fully spec-compatible, 
 		}
 	}
 ]
+```
+
+----
+
+`defaults`, partially overridden by the `opt` parameter, looks like this:
+
+```js
+const defaults = {
+	passengers: [
+		{type: 'adult', wheelchair: false, merkzeichenB: false}
+	],
+	currency: 'EUR',
+	business: false
+}
 ```
 
 ### more journey details
