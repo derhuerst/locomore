@@ -51,6 +51,7 @@ const validateJourney = (t) => (journey, i) => {
 
 		journey.legs.forEach((leg, i) => t.test('leg ' + i, (t) => {
 			t.equal(typeof leg.id, 'string')
+			t.equal(typeof leg.serviceId, 'string')
 			t.equal(leg.mode, 'train')
 			t.equal(leg.public, true)
 

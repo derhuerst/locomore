@@ -86,6 +86,7 @@ A `journey` looks as follows. Note that the legs are not fully spec-compatible, 
 		id: 's1819_2017-04-06_BLS_FFS',
 		legs: [ {
 			id: 's1819_2017-04-06_BLS_FFS-s1819_2017-04-06_BLS_FFS',
+			serviceId: '1818|2017-04-06',
 			origin: '8065969',
 			destination: '8011065',
 			departure: '2017-04-06T14:54:00+0200',
