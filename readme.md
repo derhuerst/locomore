@@ -2,10 +2,13 @@
 
 **A JavaScript client for the Locomore API.**
 
+Deprecated. [Locomore has filed for insolvency](https://web.archive.org/web/20170514064030/https://locomore.com/de/aktuelles/2017-05-11/) and has beend merged into [Flixtrain](https://www.flixtrain.com).
+
 [![npm version](https://img.shields.io/npm/v/locomore.svg)](https://www.npmjs.com/package/locomore)
 [![build status](https://img.shields.io/travis/derhuerst/locomore.svg)](https://travis-ci.org/derhuerst/locomore)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/locomore.svg)
 [![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
+[![support me on Patreon](https://img.shields.io/badge/support%20me-on%20patreon-fa7664.svg)](https://patreon.com/derhuerst)
 
 Things still missing:
 
@@ -68,7 +71,7 @@ locomore.journeys(BerlinHbf, StuttgartHbf, date)
 .catch(console.error)
 ```
 
-Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/promise) that will resolve with an object with `outward` and `returning`. Both are an array of `journey`s in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).
+Returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/promise) that will resolve with an object with `outward` and `returning`. Both are arrays of `journey`s in the [*Friendly Public Transport Format*](https://github.com/public-transport/friendly-public-transport-format).
 
 ```js
 {
@@ -132,7 +135,7 @@ const defaults = {
 
 ### more journey details
 
-To get more details for a journey, use `locomore.journeyDetails`. Pass in an array of service IDs or `journey` objects.
+To get more details for a journey, use `locomore.journeyDetails`. Pass in an array of service IDs (from `journeys.legs[n].serviceID`) or `journey` objects.
 
 ```js
 locomore.journeys(BerlinHbf, StuttgartHbf, date)
